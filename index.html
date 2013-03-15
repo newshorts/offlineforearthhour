@@ -1,0 +1,75 @@
+<!-- 
+    Author: Mike Newell © 2012
+-->
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            (function($) {
+                $(window).load(function() {
+                    
+                    var on = false;
+                    
+                    $('.flashlight').on('click', function(evt) {
+                        
+                        if(!on) {
+                            var docHeight = $(document).height();
+                        
+                            var flash = $('#flashlight');
+
+                            $('#flashlight').on('mousemove', function(evt) {
+                                flash.css({
+                                    display: 'block',
+                                    'background-position': (evt.pageX - 2500) + 'px ' + (evt.pageY - 2500) + 'px'
+                                });
+                            });
+                            
+                            flash.height(docHeight);
+                            
+                            on = true;
+                            
+                        } else {
+                            flash.height(0);
+                            
+                            flash.css({
+                                'display': 'none'
+                            });
+                            
+                            on = false;
+                            
+                            $('#flashlight').off('mousemove');
+                        }
+                        
+                    });
+                });
+            })(jQuery);
+        </script>
+        <style>
+            #flashlight {
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 9999;
+                display: none;
+                background: url(images/flashlight.png) scroll 0 0 no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <p>This is some page content</p>
+            <p><a href="#" class="flashlight">Flashlight</a></p>
+        </div>
+        <div id="flashlight">
+            <img src="images/logo.png" />
+        </div>
+    </body>
+</html>
